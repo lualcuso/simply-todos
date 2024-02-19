@@ -1,18 +1,26 @@
 import { Button, FlatList, StyleSheet, Text, View } from "react-native"; 
 
+import { Dimensions } from "react-native";
+
 import Item from "../components/Todos/Item";
 
 const List = () => {
   const todoItems = [
-    { id: 1, content: "First to-do" },
-    { id: 2, content: "Second to-do" },
+    { id: 1, content: "First to-do", done: false },
+    { id: 2, content: "Second to-do", done: true },
   ];
+
+  const windowWidth = Dimensions.get("window").width;
 
   return (
     <View style={styles.container}>
       <FlatList
+        ListHeaderComponent={<Text style={styles.listHeader}>List Name</Text>}
+        style={[styles.list, { width: windowWidth }]}
         data={todoItems}
-        renderItem={({ item }) => <Item content={item.content} />}
+        renderItem={({ item }) => (
+          <Item content={item.content} done={item.done} />
+        )}
         keyExtractor={(item) => item.id}
       />
       <Button title="Add" />
@@ -23,11 +31,15 @@ const List = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexGrow: 1,
   },
-  item: {
-    height: 40,
-    padding: 10,
-    fontSize: 18,
+  list: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  listHeader: {
+    fontSize: 36,
+    fontWeight: 'bold'
   },
 });
 
