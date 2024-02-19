@@ -1,13 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/screens/Home';
+import Create from './src/screens/Todos/Create';
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: "Simple Todo App" }}
+        />
+        <Stack.Screen name="Create" component={Create} options={{
+          title: 'Add a task',
+          headerBackTitle: "Cancel"
+        }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

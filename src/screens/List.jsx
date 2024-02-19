@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 
 import Item from "../components/Todos/Item";
 
-const List = () => {
+const List = ({ navigation }) => {
   const todoItems = [
     { id: 1, content: "First to-do", done: false },
     { id: 2, content: "Second to-do", done: true },
@@ -23,10 +23,10 @@ const List = () => {
         )}
         keyExtractor={(item) => item.id}
       />
-      <Button title="Add" />
+      <Button title="Add" onPress={() => navigation.navigate('Create')} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
